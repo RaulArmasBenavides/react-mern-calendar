@@ -60,7 +60,7 @@ describe('Pruebas en useAuthStore', () => {
         expect({ errorMessage, status, user }).toEqual({
             errorMessage: undefined,
             status: 'authenticated',
-            user: { name: 'Test User', uid: '62a10a4954e8230e568a49ab' }
+            user: { name: 'raul', uid: '642a256c150a2dae2cc83af4' }
         });
 
         expect( localStorage.getItem('token') ).toEqual( expect.any(String) );
@@ -109,6 +109,7 @@ describe('Pruebas en useAuthStore', () => {
                 ok: true,
                 uid: '1263781293',
                 name: 'Test User',
+                DNI:'73262442',
                 token: 'ALGUN-TOKEN'
             }
         });
@@ -143,7 +144,7 @@ describe('Pruebas en useAuthStore', () => {
         const { errorMessage, status, user } = result.current;
 
         expect({ errorMessage, status, user }).toEqual({
-            errorMessage: 'El usuario ya existe',
+            errorMessage: 'El correo ya está registrado',
             status: 'not-authenticated',
             user: {}
         });
@@ -174,7 +175,7 @@ describe('Pruebas en useAuthStore', () => {
 
     test('checkAuthToken debe de autenticar el usuario si hay un token', async() => {
         
-        const { data } = await calendarApi.post('/auth', testUserCredentials );
+        const { data } = await calendarApi.post('/login', testUserCredentials );
         localStorage.setItem('token', data.token );
 
         const mockStore = getMockStore({ ...initialState });
@@ -190,7 +191,7 @@ describe('Pruebas en useAuthStore', () => {
         expect({ errorMessage, status, user }).toEqual({
             errorMessage: undefined,
             status: 'authenticated',
-            user: { name: 'Test User', uid: '62a10a4954e8230e568a49ab' }
+            user: { name: 'raul', uid: '642a256c150a2dae2cc83af4' }
         });
 
 
